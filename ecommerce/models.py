@@ -102,4 +102,3 @@ class ProductAttribute(models.Model):
     attribute_value = models.ForeignKey(AttributeValue, on_delete=models.SET_NULL, null=True, blank=True)
 
 
-

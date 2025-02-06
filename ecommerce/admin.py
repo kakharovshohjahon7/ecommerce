@@ -2,7 +2,6 @@ from email.headerregistry import Group
 
 from django.contrib import admin
 from import_export.admin import ImportExportModelAdmin
-
 from ecommerce.models import Product, Category, Img, Specification, Attribute, AttributeValue, ProductAttribute
 from django.utils.html import format_html
 from adminsortable2.admin import SortableAdminMixin
@@ -50,3 +49,5 @@ class CategoryModelAdmin(admin.ModelAdmin):
 admin.site.register(Attribute)
 admin.site.register(AttributeValue)
 admin.site.register(ProductAttribute)
+# admin.site.register(Order, OrderAdmin)
+# admin.site.register(Customer, CustomerAdmin)

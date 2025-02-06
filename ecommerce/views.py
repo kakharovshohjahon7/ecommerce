@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-
+from django.contrib.auth.decorators import login_required
 from ecommerce.models import Product, Specification, ProductAttribute
 
 
@@ -18,3 +18,6 @@ def product_detail(request, pk):
         'product': product
     }
     return render(request,'ecommerce/product-details.html',context)
+
+
+

@@ -58,7 +58,7 @@ BATON = {
     "SITE_TITLE": "Admin Panel",
     "INDEX_TITLE": "Boshqaruv paneli",
     "SUPPORT_HREF": "https://example.com/support",
-    "COPYRIGHT": "2025 © Muzaffar",
+    "COPYRIGHT": "2025  Shohjahon",
 }
 
 
