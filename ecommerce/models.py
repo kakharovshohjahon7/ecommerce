@@ -1,6 +1,9 @@
 from django.db import models
 from decimal import Decimal
 from django import forms
+from phonenumber_field.modelfields import PhoneNumberField
+import phonenumbers
+
 
 # Create your models here.
 
@@ -102,3 +105,46 @@ class ProductAttribute(models.Model):
     attribute_value = models.ForeignKey(AttributeValue, on_delete=models.SET_NULL, null=True, blank=True)
 
 
+class Customer(models.Model):
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    email = models.EmailField(unique=True)
+    phone_number = PhoneNumberField(region="UZ")
+    address = models.TextField()
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
+class Order(BaseModel):
+    full_name = models.CharField(max_length=255, null=True, blank=True)
+    phone_number = PhoneNumberField(region="UZ")
+    quantity = models.PositiveIntegerField(default=1)
+    order_date = models.DateTimeField(auto_now_add=True)
+    product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.full_name} => {self.phone_number}'
+
+class Comment(BaseModel):
+    full_name = models.CharField(max_length=255, null=True, blank=True)
+    email = models.EmailField()
+    content = models.TextField()
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,
+                                    related_name='comments',
+                                    null=True, blank=True)
+    is_negative = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.full_name} => {self.created_at}'
+
+    class Meta:
+        ordering = ['-created_at']
+
+    def calculate_total_price(self):
+        self.total_price = self.product.price * self.quantity
+        self.save()
+
+    def is_product_available(self):
+        if self.product.is_available():
+            return True
+        return False

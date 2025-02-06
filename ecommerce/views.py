@@ -19,5 +19,6 @@ def product_detail(request, pk):
     }
     return render(request,'ecommerce/product-details.html',context)
 
-
+def shopping_cart(request):
+    return render(request, 'shopping-cart.html')
 
