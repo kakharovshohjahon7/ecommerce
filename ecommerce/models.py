@@ -3,6 +3,7 @@ from decimal import Decimal
 from django import forms
 from phonenumber_field.modelfields import PhoneNumberField
 import phonenumbers
+from django.contrib.auth.models import User
 
 
 # Create your models here.
@@ -106,11 +107,14 @@ class ProductAttribute(models.Model):
 
 
 class Customer(models.Model):
-    first_name = models.CharField(max_length=255)
-    last_name = models.CharField(max_length=255)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=100)
+    last_name = models.CharField(max_length=100)
     email = models.EmailField(unique=True)
-    phone_number = PhoneNumberField(region="UZ")
-    address = models.TextField()
+    phone_number = models.CharField(max_length=20)
+    shipping_address = models.TextField()
+    billing_address = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"

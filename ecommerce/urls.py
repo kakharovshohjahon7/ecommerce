@@ -5,5 +5,5 @@ from ecommerce import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('detail/<int:pk>/', views.product_detail, name='product_detail'),
-    
+    path('profile/', views.customer_profile, name='customer_profile'),
 ]
