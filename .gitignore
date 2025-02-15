@@ -1,0 +1,19 @@
+# Node.js loyihalari uchun
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# Python loyihalari uchun
+__pycache__/
+*.pyc
+
+# .env fayli uchun
+.env
+
+# IDE va tahrirlovchi fayllari
+.vscode/
+.idea/
+
+# MacOS uchun
+.DS_Store
